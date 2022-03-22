@@ -53,8 +53,8 @@ where
     type Output = Response;
 
     async fn call(&self, mut req: Request) -> Result<Self::Output> {
-        let check_https_with_x_forwarded_proto = req.headers().contains_key(header::FORWARDED) 
-        
+        let check_https_with_x_forwarded_proto = req.headers().contains_key(header::FORWARDED);
+
         if req.scheme() == &Scheme::HTTP || check_https_with_x_forwarded_proto {
             if let Some(host) = req.headers().get(header::HOST).cloned() {
                 if let Ok(host) = host.to_str() {
